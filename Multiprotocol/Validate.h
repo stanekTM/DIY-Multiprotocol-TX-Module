@@ -311,6 +311,7 @@
 	#undef	XK_NRF24L01_INO
 	#undef	YD717_NRF24L01_INO
 	#undef	ZSX_NRF24L01_INO
+	#undef  STANEK_NRF24L01_INO
 #endif
 #if not defined(STM32_BOARD)
 	#undef SX1276_INSTALLED
@@ -359,6 +360,7 @@
 	#undef DSM_FWD_PGM
 	#undef WFLY2_HUB_TELEMETRY
 	#undef LOLI_HUB_TELEMETRY
+	#undef STANEK_HUB_TELEMETRY
 #else
 	#if not defined(SCANNER_CC2500_INO) || not defined(SCANNER_TELEMETRY)
 		#undef SCANNER_TELEMETRY
