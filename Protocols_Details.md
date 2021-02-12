@@ -114,7 +114,7 @@ CFlie|38|CFlie||||||||NRF24L01|
 [LOLI](Protocols_Details.md#LOLI---82)|82|||||||||NRF24L01|
 [MJXq](Protocols_Details.md#MJXQ---18)|18|WLH08|X600|X800|H26D|E010*|H26WH|PHOENIX*||NRF24L01|XN297
 [MLINK](Protocols_Details.md#MLINK---78)|78|||||||||CYRF6936|
-[MT99xx](Protocols_Details.md#MT99XX---17)|17|MT|H7|YZ|LS|FY805||||NRF24L01|XN297
+[MT99xx](Protocols_Details.md#MT99XX---17)|17|MT|H7|YZ|LS|FY805|A180|DRAGON||NRF24L01|XN297
 [NCC1701](Protocols_Details.md#NCC1701---44)|44|NCC1701||||||||NRF24L01|
 [OMP](Protocols_Details.md#OMP---77)|77|||||||||CC2500&NRF24L01|XN297L
 [OpenLRS](Protocols_Details.md#OpenLRS---27)|27|||||||||None|
@@ -1403,6 +1403,15 @@ Model: XK A180
 CH1|CH2|CH3|CH4|CH5
 ---|---|---|---|---
 A|E|T|R|3D6G
+
+### Sub_protocol DRAGON - *6*
+Model: Eachine Mini Wing Dragon
+
+CH1|CH2|CH3|CH4|CH5|CH6
+---|---|---|---|---|---
+A|E|T|R|MODE|RTH
+
+MODE: -100%=Beginner, 0%=Intermediate, +100%=Advanced
 
 ## NCC1701 - *44*
 Model: Air Hogs Star Trek USS Enterprise NCC-1701-A

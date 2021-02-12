@@ -328,7 +328,8 @@
 #define RLINK_HUB_TELEMETRY			// Use FrSkyD Hub format to send telemetry to TX
 #define WFLY2_HUB_TELEMETRY			// Use FrSkyD Hub format to send telemetry to TX
 #define LOLI_HUB_TELEMETRY			// Use FrSkyD Hub format to send telemetry to TX
-#define MLINK_HUB_TELEMETRY			// Use FrSkyD Hub format to send telemetry to TX
+//#define MLINK_HUB_TELEMETRY			// Use FrSkyD Hub format to send telemetry to TX
+#define MLINK_FW_TELEMETRY			// Forward received telemetry packet directly to TX to be decoded by erskyTX and OpenTX
 //#define HITEC_HUB_TELEMETRY		// Use FrSkyD Hub format to send basic telemetry to the radios which can decode it like er9x, erskyTX and OpenTX
 #define HITEC_FW_TELEMETRY			// Forward received telemetry packets to be decoded by erskyTX and OpenTX
 #define SCANNER_TELEMETRY			// Forward spectrum scanner data to TX
@@ -706,6 +707,8 @@ const PPM_Parameters PPM_prot[14*NBR_BANKS]=	{
 		YZ
 		LS
 		FY805
+		A180
+		DRAGON
 	PROTO_NCC1701
 		NONE
 	PROTO_OMP

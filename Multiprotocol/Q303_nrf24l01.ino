@@ -174,10 +174,10 @@ static uint8_t __attribute__((unused))  cx35_lastButton()
 	return command;
 }
 
-static void __attribute__((unused)) Q303_send_packet(uint8_t bind)
+static void __attribute__((unused)) Q303_send_packet()
 {
 	uint16_t aileron, elevator, throttle, rudder, slider;
-	if(bind)
+	if(IS_BIND_IN_PROGRESS)
 	{
 		packet[0] = 0xaa;
 		memcpy(&packet[1], rx_tx_addr + 1, 4);
@@ -270,7 +270,7 @@ static void __attribute__((unused)) Q303_send_packet(uint8_t bind)
 	// Power on, TX mode, CRC enabled
 	XN297_Configure(_BV(NRF24L01_00_EN_CRC) | _BV(NRF24L01_00_CRCO) | _BV(NRF24L01_00_PWR_UP));
 
-	NRF24L01_WriteReg(NRF24L01_05_RF_CH, bind ? Q303_RF_BIND_CHANNEL : hopping_frequency[hopping_frequency_no++]);
+	NRF24L01_WriteReg(NRF24L01_05_RF_CH, IS_BIND_IN_PROGRESS ? Q303_RF_BIND_CHANNEL : hopping_frequency[hopping_frequency_no++]);
 	hopping_frequency_no %= rf_ch_num;
 
 	NRF24L01_WriteReg(NRF24L01_07_STATUS, 0x70);
@@ -286,32 +286,13 @@ static void __attribute__((unused)) Q303_RF_init()
 	const uint8_t bind_address[] = {0xcc,0xcc,0xcc,0xcc,0xcc};
 
 	NRF24L01_Initialize();
-	NRF24L01_SetTxRxMode(TX_EN);
-	switch(sub_protocol)
+
+	if(sub_protocol==Q303)
 	{
-		case CX35:
-		case CX10D:
-		case CX10WD:
-			NRF24L01_SetBitrate(NRF24L01_BR_1M);
-			break;
-		case Q303:
-			XN297_SetScrambledMode(XN297_UNSCRAMBLED);
-			NRF24L01_SetBitrate(NRF24L01_BR_250K);
-			break;
+		XN297_SetScrambledMode(XN297_UNSCRAMBLED);
+		NRF24L01_SetBitrate(NRF24L01_BR_250K);
 	}
 	XN297_SetTXAddr(bind_address, 5);
-	NRF24L01_FlushTx();
-	NRF24L01_FlushRx();
-	NRF24L01_WriteReg(NRF24L01_07_STATUS, 0x70);		// Clear data ready, data sent, and retransmit
-	NRF24L01_WriteReg(NRF24L01_01_EN_AA, 0x00);			// No Auto Acknowldgement on all data pipes
-	NRF24L01_WriteReg(NRF24L01_02_EN_RXADDR, 0x01);
-	NRF24L01_WriteReg(NRF24L01_03_SETUP_AW, 0x03);
-	NRF24L01_WriteReg(NRF24L01_04_SETUP_RETR, 0x00);	// no retransmits
-	NRF24L01_SetPower();
-	NRF24L01_Activate(0x73);							// Activate feature register
-	NRF24L01_WriteReg(NRF24L01_1C_DYNPD, 0x00);			// Disable dynamic payload length on all pipes
-	NRF24L01_WriteReg(NRF24L01_1D_FEATURE, 0x01);		// Set feature bits on
-	NRF24L01_Activate(0x73);
 }
 
 static void __attribute__((unused)) Q303_initialize_txid()
@@ -353,27 +334,20 @@ static void __attribute__((unused)) Q303_initialize_txid()
 
 uint16_t Q303_callback()
 {
-	if(IS_BIND_DONE)
+	#ifdef MULTI_SYNC
+		telemetry_set_input_sync(packet_period);
+	#endif
+	if(bind_counter)
 	{
-		#ifdef MULTI_SYNC
-			telemetry_set_input_sync(packet_period);
-		#endif
-		Q303_send_packet(0);
-	}
-	else
-	{
+		bind_counter--;
 		if (bind_counter == 0)
 		{
 			XN297_SetTXAddr(rx_tx_addr, 5);
 			packet_count = 0;
 			BIND_DONE;
 		}
-		else
-		{
-			Q303_send_packet(1);
-			bind_counter--;
-		}
 	}
+	Q303_send_packet();
 	return packet_period;
 }
 
