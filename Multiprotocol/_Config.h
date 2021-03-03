@@ -344,6 +344,19 @@
 #define BAYANG_RX_TELEMETRY			// Forward channels data to TX
 #define STANEK_HUB_TELEMETRY    // Use FrSkyD Hub format to send telemetry to TX
 
+/**************************/
+/***  TRAINER SETTINGS  ***/
+/**************************/
+// By default Multi uses the telemetry line to send the received channels using a RX protocol (FrSky, DSM, AFHDS2A, Bayang) to the radio.
+// But this does not work on FrSky radios since the telemetry lines of the internal and external modules are shared (hardware limitation).
+// Using one of the method below (both can be enabled) on a STM32 module enables to go around that issue but needs a hardware modification on the module itself.
+
+//SBUS signal needs an inverter between the STM32 USART1 TX pin and the radio bay pin 2
+//#define SEND_SBUS_SERIAL
+
+//CPPM signal needs a resistor between the STM32 USART1 TX pin and the radio bay pin 2
+//#define SEND_CPPM
+
 /****************************/
 /*** SERIAL MODE SETTINGS ***/
 /****************************/
