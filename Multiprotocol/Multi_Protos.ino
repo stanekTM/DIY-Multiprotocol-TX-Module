@@ -99,6 +99,8 @@ const char STR_LOLI[]       ="LOLI";
 const char STR_E129[]       ="E129";
 const char STR_E016H[]      ="E016H";
 
+const char STR_STANEK[]     ="Stanek";
+
 const char STR_SUBTYPE_FLYSKY[] =     "\x04""Std\0""V9x9""V6x6""V912""CX20";
 const char STR_SUBTYPE_HUBSAN[] =     "\x04""H107""H301""H501";
 const char STR_SUBTYPE_FRSKYD[] =     "\x06""D8\0   ""Cloned";
@@ -154,6 +156,8 @@ const char STR_SUBTYPE_REALACC[] =    "\x03""R11";
 const char STR_SUBTYPE_KYOSHO[] =     "\x04""FHSS""Hype";
 const char STR_SUBTYPE_FUTABA[] =     "\x05""SFHSS";
 const char STR_SUBTYPE_JJRC345[] =    "\x08""JJRC345\0""SkyTmblr";
+
+const char STR_SUBTYPE_STANEK[] =     "\x04""2ch\0""3ch\0""4ch\0""5ch\0""6ch\0""8ch\0""10ch""12ch";
 
 #define NO_SUBTYPE		nullptr
 
@@ -403,6 +407,11 @@ const mm_protocol_definition multi_protocols[] = {
 	#if defined(SLT_CCNRF_INO)
 		{PROTO_SLT,        STR_SLT,       STR_SUBTYPE_SLT,       5, OPTION_RFTUNE,  0, 1, SW_NRF,    SLT_init,        SLT_callback        },
 	#endif
+	
+	#if defined(STANEK_NRF24L01_INO)
+	  {PROTO_STANEK,     STR_STANEK,    STR_SUBTYPE_STANEK,    8, OPTION_NONE,    0, 0, SW_NRF,    STANEK_init,     STANEK_callback     },
+	#endif
+	
 	#if defined(SYMAX_NRF24L01_INO)
 		{PROTO_SYMAX,      STR_SYMAX,     STR_SUBTYPE_SYMAX,     2, OPTION_NONE,    0, 0, SW_NRF,    SYMAX_init,      SYMAX_callback      },
 	#endif
