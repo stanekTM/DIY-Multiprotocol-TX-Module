@@ -120,7 +120,7 @@ CFlie|38|CFlie||||||||NRF24L01|
 [NCC1701](Protocols_Details.md#NCC1701---44)|44|||||||||NRF24L01|
 [OMP](Protocols_Details.md#OMP---77)|77|||||||||CC2500&NRF24L01|XN297L
 [OpenLRS](Protocols_Details.md#OpenLRS---27)|27|||||||||None|
-[Pelikan](Protocols_Details.md#Pelikan---60)|60|Pro|Lite|||||||A7105|
+[Pelikan](Protocols_Details.md#Pelikan---60)|60|Pro|Lite|SCX24||||||A7105|
 [Potensic](Protocols_Details.md#Potensic---51)|51|A20||||||||NRF24L01|XN297
 [PROPEL](Protocols_Details.md#PROPEL---66)|66|74-Z||||||||NRF24L01|
 [Q2X2](Protocols_Details.md#Q2X2---29)|29|Q222|Q242|Q282||||||NRF24L01|
@@ -355,6 +355,17 @@ Models: TX: CADET PRO V4, RX: RX-602 V4
 Models: TX: CADET 4 LITE
 
 **Only 1 frequency hopping table**
+
+### Sub_protocol SCX24 - *2*
+Models: SCX24
+
+**Only 1 ID**
+
+Extended limits supported
+
+CH1|CH2|CH3
+---|---|---
+STEERING|THROTTLE|CH3
 
 ## WFLY2 - *79*
 Receivers: RF201S,RF206S,RF207S,RF209S
