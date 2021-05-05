@@ -101,6 +101,7 @@ const char STR_E016H[]      ="E016H";
 const char STR_IKEAANSLUTA[]="Ansluta";
 const char STR_CONFIG[]     ="Config";
 const char STR_LOSI[]       ="Losi";
+const char STR_MOULDKG[]    ="MouldKg";
 
 const char STR_STANEK[]     ="Stanek";
 
@@ -368,6 +369,9 @@ const mm_protocol_definition multi_protocols[] = {
 	#endif
 	#if defined(MLINK_CYRF6936_INO)
 		{PROTO_MLINK,      STR_MLINK,     NO_SUBTYPE,            0, OPTION_NONE,    1, 0, SW_CYRF,   MLINK_init,      MLINK_callback      },
+	#endif
+	#if defined(MOULDKG_NRF24L01_INO)
+		{PROTO_MOULDKG,    STR_MOULDKG,   NO_SUBTYPE,            0, OPTION_NONE,    0, 0, SW_NRF,    MOULDKG_init,    MOULDKG_callback    },
 	#endif
 	#if defined(MT99XX_CCNRF_INO)
 		{PROTO_MT99XX,     STR_MT99XX,    STR_SUBTYPE_MT99,      7, OPTION_NONE,    0, 0, SW_NRF,    MT99XX_init,     MT99XX_callback     },
